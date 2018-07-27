@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Graph
 {    
-    public class UndirectedGraph<T> : IGraph<T, Vertex<T>> where T : IComparable
+    public class UndirectedGraph<T> : BaseGraph<T, Vertex<T>> where T : IComparable
     {
         public List<Vertex<T>> Vertices { get; private set; }
 
@@ -21,20 +21,22 @@ namespace Graph
             get { return Vertices.Count; }
         }
 
-        public UndirectedGraph()
+        public UndirectedGraph()            
         {
             Vertices = new List<Vertex<T>>();
         }
-
-        public void AddVertex(Vertex<T> vertex)
+        
+        public override void AddVertex(Vertex<T> vertex)
         {
             if (Vertices.Contains(vertex))
+            {
                 throw new Exception("Vertex already exists");
+            }
 
             Vertices.Add(vertex);
         }        
 
-        public bool RemoveVertex(Vertex<T> vertex)
+        public override bool RemoveVertex(Vertex<T> vertex)
         {
             for (int i = 0; i < vertex.Count; i++)
             {
@@ -44,7 +46,7 @@ namespace Graph
             return Vertices.Remove(vertex);            
         }
 
-        public bool AddEdge(Vertex<T> a, Vertex<T> b)
+        public override bool AddEdge(Vertex<T> a, Vertex<T> b, int distance = 0)
         {
             if (!(Vertices.Contains(a) && Vertices.Contains(b)))
             {
@@ -53,10 +55,11 @@ namespace Graph
 
             Vertices[Vertices.IndexOf(a)].Neighbors.Add(b);
             Vertices[Vertices.IndexOf(b)].Neighbors.Add(a);
+
             return true;
         }
 
-        public bool RemoveEdge(Vertex<T> a, Vertex<T> b)
+        public override bool RemoveEdge(Vertex<T> a, Vertex<T> b)
         {
             if (!(Vertices.Contains(a) && Vertices.Contains(b) && Vertices[Vertices.IndexOf(a)].Neighbors.Contains(b)))
             {
@@ -68,7 +71,7 @@ namespace Graph
             return true;
         }
 
-        public Vertex<T> Search(T Value)
+        public override Vertex<T> Search(T Value)
         {
             return Vertices[Vertices.FindIndex((a) => { return a.Value.CompareTo(Value) == 0; })];
         }
@@ -81,23 +84,25 @@ namespace Graph
             {
                 this[i].IsVisited = false;
             }
-        }
 
-        private void depthFirstSearch(Vertex<T> current)
-        {
-            current.IsVisited = true;
-
-            foreach(var vert in current.Neighbors)
+            void depthFirstSearch(Vertex<T> current)
             {
-                if (!vert.IsVisited)
-                {
-                    Console.WriteLine($"\t{current.Value}->{vert.Value}");
-                    depthFirstSearch(vert);
-                }
-            }
+                current.IsVisited = true;
 
-            return;
+                foreach (var vert in current.Neighbors)
+                {
+                    if (!vert.IsVisited)
+                    {
+                        Console.WriteLine($"\t{current.Value}->{vert.Value}");
+                        depthFirstSearch(vert);
+                    }
+                }
+
+                return;
+            }
         }
+
+        
 
         public void BreadthFirstTraversal(Vertex<T> start)
         {
@@ -107,31 +112,30 @@ namespace Graph
             {
                 this[i].IsVisited = false;
             }
-        }
 
-        private void breadthFirstTraversal(Vertex<T> current, Queue<Vertex<T>> queue)
-        {            
-            current.IsVisited = true;
-
-            foreach(var vert in current.Neighbors)
+            void breadthFirstTraversal(Vertex<T> current, Queue<Vertex<T>> queue)
             {
-                if (!vert.IsVisited && !queue.Contains(vert))
+                current.IsVisited = true;
+
+                foreach (var vert in current.Neighbors)
                 {
-                    queue.Enqueue(vert);
+                    if (!vert.IsVisited && !queue.Contains(vert))
+                    {
+                        queue.Enqueue(vert);
+                    }
                 }
+
+                queue.Dequeue();
+
+                if (queue.Count == 0)
+                {
+                    return;
+                }
+
+                Console.WriteLine($"\t{current.Value}->{queue.Peek().Value}");
+
+                breadthFirstTraversal(queue.Peek(), queue);
             }
-
-            queue.Dequeue();
-
-            if (queue.Count == 0)
-            {
-                return;
-            }
-
-            Console.WriteLine($"\t{current.Value}->{queue.Peek().Value}");
-
-            breadthFirstTraversal(queue.Peek(), queue);
-        }
-
+        }                
     }
 }

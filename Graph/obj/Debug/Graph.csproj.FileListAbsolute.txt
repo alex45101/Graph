@@ -18,3 +18,10 @@ C:\Users\GMRInstructor\Documents\Visual Studio 2017\Projects\Graph\Graph\obj\Deb
 C:\Users\GMRInstructor\Documents\Visual Studio 2017\Projects\Graph\Graph\obj\Debug\Graph.csproj.CoreCompileInputs.cache
 C:\Users\GMRInstructor\Documents\Visual Studio 2017\Projects\Graph\Graph\obj\Debug\Graph.exe
 C:\Users\GMRInstructor\Documents\Visual Studio 2017\Projects\Graph\Graph\obj\Debug\Graph.pdb
+C:\Users\AlexLeontiev\Documents\GitHub\Graph\Graph\bin\Debug\Graph.exe.config
+C:\Users\AlexLeontiev\Documents\GitHub\Graph\Graph\bin\Debug\Graph.exe
+C:\Users\AlexLeontiev\Documents\GitHub\Graph\Graph\bin\Debug\Graph.pdb
+C:\Users\AlexLeontiev\Documents\GitHub\Graph\Graph\obj\Debug\Graph.csprojAssemblyReference.cache
+C:\Users\AlexLeontiev\Documents\GitHub\Graph\Graph\obj\Debug\Graph.csproj.CoreCompileInputs.cache
+C:\Users\AlexLeontiev\Documents\GitHub\Graph\Graph\obj\Debug\Graph.exe
+C:\Users\AlexLeontiev\Documents\GitHub\Graph\Graph\obj\Debug\Graph.pdb

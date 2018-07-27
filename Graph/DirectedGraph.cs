@@ -31,25 +31,25 @@ namespace Graph
         public override void AddVertex(DVertex<T> vertex)
         {
             if (Vertices.Contains(vertex))
-                throw new Exception("Vertex already exists");            
+            {
+                throw new Exception("Vertex already exists");
+            }
 
             Vertices.Add(vertex);
         }
 
         public override bool AddEdge(DVertex<T> a, DVertex<T> b, int distance)
         {
-            if (!Vertices.Contains(a) && !Vertices.Contains(b) && GetEdge(a, b) == null)
+            if (GetEdge(a, b) == null)
+            {
                 return false;
+            }
 
-            Edges.Add(new Edge<T>(a, b, distance));
+            a.Neighbors.Add(new Edge<T>(a, b, distance));
+            Edges.Add(a.Neighbors[a.Count - 1]);
             return true;
         }
-
-        //Fix this
-        public override bool AddEdge(DVertex<T> a, DVertex<T> b)
-        {
-            throw new NotImplementedException();
-        }
+        
 
         public override bool RemoveVertex(DVertex<T> vertex)
         {
@@ -57,20 +57,31 @@ namespace Graph
             {
                 return false;
             }
-
-            //TODO finish            
-
+            
+            for (int i = 0; i < Edges.Count; i++)
+            {
+                if (Edges[i].StartingPoint == vertex)
+                {
+                    Edges.RemoveAt(i);
+                }
+                else if (Edges[i].EndingPoint == vertex)
+                {
+                    Edges.RemoveAt(i);
+                }
+            }
             return true;
         }        
 
         public override bool RemoveEdge(DVertex<T> a, DVertex<T> b)
         {
             Edge<T> temp = GetEdge(a, b);
-            if (!Vertices.Contains(a) && !Vertices.Contains(b) && temp == null)
+            if (temp == null)
+            {
                 return false;
+            }
 
+            a.Neighbors.Remove(temp);
             Edges.Remove(temp);
-
             return true;
         }
 
@@ -82,7 +93,9 @@ namespace Graph
         public Edge<T> GetEdge(DVertex<T> a, DVertex<T> b)
         {
             if (!Vertices.Contains(a) && !Vertices.Contains(b))
+            {
                 return null;
+            }
 
             for (int i = 0; i < Edges.Count; i++)
             {
