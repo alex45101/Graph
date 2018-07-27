@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BaseGraph.cs" />
     <Compile Include="BaseVertex.cs" />
     <Compile Include="DirectedGraph.cs" />
     <Compile Include="DVertex.cs" />

@@ -8,12 +8,12 @@ namespace Graph
 {
     public class Edge<T>
     {
-        public Vertex<T> StartingPoint;
-        public Vertex<T> EndingPoint;
+        public DVertex<T> StartingPoint;
+        public DVertex<T> EndingPoint;
         public int Distance;
         public bool IsVisite = false;
 
-        public Edge(Vertex<T> startingPoint, Vertex<T> endingPoint, int distance)
+        public Edge(DVertex<T> startingPoint, DVertex<T> endingPoint, int distance)
         {
             StartingPoint = startingPoint;
             EndingPoint = endingPoint;

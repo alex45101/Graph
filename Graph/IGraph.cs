@@ -10,7 +10,7 @@ namespace Graph
     {
         void AddVertex(TEdge vertex);
         bool RemoveVertex(TEdge vertex);
-        bool AddEdge(TEdge a, TEdge b);
+        bool AddEdge(TEdge a, TEdge b);        
         bool RemoveEdge(TEdge a, TEdge b);
         TEdge Search(TData value);             
     }
