@@ -11,7 +11,7 @@ namespace Graph
         public DVertex<T> StartingPoint;
         public DVertex<T> EndingPoint;
         public int Distance;
-        public bool IsVisite = false;
+        public bool IsVisited = false;
 
         public Edge(DVertex<T> startingPoint, DVertex<T> endingPoint, int distance)
         {

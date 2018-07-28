@@ -140,8 +140,7 @@ namespace Graph
                 return;
             }
         }
-
-        //Fix this
+        
         public void BreadthFirstTraversal(DVertex<T> start)
         {
             breadthFirstTraversal(start, new Queue<DVertex<T>>(new DVertex<T>[] { start }));
@@ -157,7 +156,7 @@ namespace Graph
 
                 foreach (var neighbor in current.Neighbors)
                 {
-                    if (!neighbor.IsVisite && !queue.Contains(neighbor.EndingPoint))
+                    if (!neighbor.EndingPoint.IsVisited && !queue.Contains(neighbor.EndingPoint))
                     {
                         queue.Enqueue(neighbor.EndingPoint);
                     }
@@ -172,7 +171,7 @@ namespace Graph
 
                 Console.WriteLine($"\t{current.Value}->{queue.Peek().Value}");
 
-                breadthFirstTraversal(current, queue);
+                breadthFirstTraversal(queue.Peek(), queue);
             }
         }
     }
