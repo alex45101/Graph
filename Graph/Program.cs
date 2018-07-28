@@ -56,6 +56,9 @@ namespace Graph
             Console.WriteLine("\nDirected Breadth-First Traversal:");
             directed.BreadthFirstTraversal(directed[0]);
 
+            PriorityQueue<int> queue = new PriorityQueue<int>();
+
+
             Console.ReadKey();
         }        
     }

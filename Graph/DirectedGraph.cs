@@ -161,7 +161,7 @@ namespace Graph
                         queue.Enqueue(neighbor.EndingPoint);
                     }
                 }
-
+                
                 queue.Dequeue();
 
                 if (queue.Count == 0)

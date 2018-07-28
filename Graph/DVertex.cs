@@ -12,7 +12,7 @@ namespace Graph
         {
             get { return Neighbors[index]; }
             set { Neighbors[index] = value; }
-        }
+        }        
 
         public DVertex(T value)
             : base(value)
