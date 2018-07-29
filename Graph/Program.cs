@@ -56,7 +56,7 @@ namespace Graph
             Console.WriteLine("\nDirected Breadth-First Traversal:");
             directed.BreadthFirstTraversal(directed[0]);
 
-            PriorityQueue<int> queue = new PriorityQueue<int>();
+            PriorityQueue<int> queue = new PriorityQueue<int>(Comparer<int>.Create((a, b) => a.CompareTo(b)));
 
 
             Console.ReadKey();

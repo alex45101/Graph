@@ -9,6 +9,7 @@ namespace Graph
     public class PriorityQueue<T> where T : IComparable
     {
         private T[] tree = new T[30];
+        private IComparer<T> comparer;
         public int Count { get; private set; }
         public T this[int i]
         {
@@ -23,8 +24,9 @@ namespace Graph
             }
         }
 
-        public PriorityQueue()
+        public PriorityQueue(IComparer<T> comparer)
         {
+            this.comparer = comparer ?? Comparer<T>.Default;
             Count = 0;
         }
 
@@ -40,9 +42,10 @@ namespace Graph
             tree[Count] = value;
 
             //HeapifyUp   
+            HeapifyUp(Count);
         }
 
-        public T Pop()
+        public T Dequeue()
         {
             T root = tree[0];
 
@@ -60,12 +63,12 @@ namespace Graph
         {
             int parent = index / 2;
 
-            if (tree[parent].CompareTo(tree[0]) == 0)
+            if (comparer.Compare(tree[parent], tree[0]) == 0)
             {
                 return;
             }
 
-            if (tree[index].CompareTo(tree[parent]) < 0)
+            if (comparer.Compare(tree[index], tree[parent]) < 0)
             {
                 T temp = tree[index];
                 tree[index] = tree[parent];
@@ -78,9 +81,7 @@ namespace Graph
         private void IncreaseTree()
         {
             T[] temp = new T[tree.Length * 2];
-
             tree.CopyTo(temp, 0);
-
             tree = temp;
         }
     }
