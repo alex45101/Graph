@@ -174,5 +174,10 @@ namespace Graph
                 breadthFirstTraversal(queue.Peek(), queue);
             }
         }
+
+        public IEnumerable<Vertex<T>> Dijkstra(Vertex<T> start, Vertex<T> end)
+        {
+            throw new IndexOutOfRangeException();
+        }
     }
 }

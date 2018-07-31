@@ -58,6 +58,19 @@ namespace Graph
 
             PriorityQueue<int> queue = new PriorityQueue<int>(Comparer<int>.Create((a, b) => a.CompareTo(b)));
 
+            for (int i = 10; i > 0; i--)
+            {
+                queue.Enqueue(i);
+                Console.WriteLine(queue.ToString());
+            }
+
+            Console.WriteLine();
+
+            for (int i = 0; i < 10; i++)
+            {
+                queue.Dequeue();
+                Console.WriteLine(queue.ToString());
+            }
 
             Console.ReadKey();
         }        
