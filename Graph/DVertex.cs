@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Graph
 {
-    public class DVertex<T> : BaseVertex<T, Edge<T>>
+    public class DVertex<T> : BaseVertex<T, Edge<T>> where T : IComparable<T>
     {
         public override Edge<T> this[int index]
         {

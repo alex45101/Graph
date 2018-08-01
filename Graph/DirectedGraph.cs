@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Graph
 {
-    public class DirectedGraph<T> : BaseGraph<T, DVertex<T>> where T : IComparable
+    public class DirectedGraph<T> : BaseGraph<T, DVertex<T>> where T : IComparable<T>
     {
         public List<DVertex<T>> Vertices { get; private set; }
         public List<Edge<T>> Edges { get; private set; }
@@ -28,7 +28,7 @@ namespace Graph
             Vertices = new List<DVertex<T>>();
             Edges = new List<Edge<T>>();
         }
-        
+
         public override void AddVertex(DVertex<T> vertex)
         {
             if (Vertices.Contains(vertex))
@@ -50,7 +50,7 @@ namespace Graph
             Edges.Add(a.Neighbors[a.Count - 1]);
             return true;
         }
-        
+
 
         public override bool RemoveVertex(DVertex<T> vertex)
         {
@@ -58,7 +58,7 @@ namespace Graph
             {
                 return false;
             }
-            
+
             for (int i = 0; i < Edges.Count; i++)
             {
                 if (Edges[i].StartingPoint == vertex)
@@ -68,7 +68,7 @@ namespace Graph
                 }
                 else if (Edges[i].EndingPoint == vertex)
                 {
-                    Edges[i].StartingPoint.Neighbors.RemoveAt(Edges[i].StartingPoint.Neighbors.FindIndex((a) => { return a.EndingPoint == vertex; }));                    
+                    Edges[i].StartingPoint.Neighbors.RemoveAt(Edges[i].StartingPoint.Neighbors.FindIndex((a) => { return a.EndingPoint == vertex; }));
                     Edges.RemoveAt(i);
                     i--;
                 }
@@ -77,7 +77,7 @@ namespace Graph
             Vertices.Remove(vertex);
 
             return true;
-        }        
+        }
 
         public override bool RemoveEdge(DVertex<T> a, DVertex<T> b)
         {
@@ -98,7 +98,7 @@ namespace Graph
         }
 
         public Edge<T> GetEdge(DVertex<T> a, DVertex<T> b)
-        {            
+        {
             if (!(Vertices.Contains(a) && Vertices.Contains(b)))
             {
                 return null;
@@ -140,7 +140,7 @@ namespace Graph
                 return;
             }
         }
-        
+
         public void BreadthFirstTraversal(DVertex<T> start)
         {
             breadthFirstTraversal(start, new Queue<DVertex<T>>(new DVertex<T>[] { start }));
@@ -161,7 +161,7 @@ namespace Graph
                         queue.Enqueue(neighbor.EndingPoint);
                     }
                 }
-                
+
                 queue.Dequeue();
 
                 if (queue.Count == 0)
@@ -175,8 +175,24 @@ namespace Graph
             }
         }
 
-        public IEnumerable<Vertex<T>> Dijkstra(Vertex<T> start, Vertex<T> end)
-        {
+        public IEnumerable<Vertex<T>> Dijkstra(DVertex<T> start, DVertex<T> end)
+        {            
+            var info = new Dictionary<DVertex<T>, (DVertex<T> founder, int distance)>();
+            var queue = new PriorityQueue<DVertex<T>>(Comparer<DVertex<T>>.Create((a, b) => a.Value.CompareTo(b.Value)));
+
+            for (int i = 0; i < Count; i++)
+            {
+                this[i].IsVisited = false;
+                info.Add(this[i], (null, int.MaxValue));
+            }
+
+            while (!queue.IsEmpty())
+            {
+                var vertex = queue.Dequeue();
+
+                //find tentative distances
+            }
+
             throw new IndexOutOfRangeException();
         }
     }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Graph
 {
-    public class PriorityQueue<T> where T : IComparable
+    public class PriorityQueue<T> where T : IComparable<T>
     {
         private T[] tree = new T[30];
         private IComparer<T> comparer;
@@ -63,10 +63,15 @@ namespace Graph
         //Heapify
         public void Sort()
         {
-            for (int i = count / 2; i > -1; i--)
+            for (int i = count / 2; i > 0; i--)
             {
                 HeapifyDown(i);
             }
+        }
+
+        public bool IsEmpty()
+        {
+            return count == 0;
         }
 
         private void HeapifyUp(int index)

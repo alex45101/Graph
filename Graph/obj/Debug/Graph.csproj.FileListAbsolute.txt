@@ -25,3 +25,6 @@ C:\Users\AlexLeontiev\Documents\GitHub\Graph\Graph\obj\Debug\Graph.csprojAssembl
 C:\Users\AlexLeontiev\Documents\GitHub\Graph\Graph\obj\Debug\Graph.csproj.CoreCompileInputs.cache
 C:\Users\AlexLeontiev\Documents\GitHub\Graph\Graph\obj\Debug\Graph.exe
 C:\Users\AlexLeontiev\Documents\GitHub\Graph\Graph\obj\Debug\Graph.pdb
+C:\Users\AlexLeontiev\Documents\GitHub\Graph\Graph\bin\Debug\System.ValueTuple.dll
+C:\Users\AlexLeontiev\Documents\GitHub\Graph\Graph\bin\Debug\System.ValueTuple.xml
+C:\Users\AlexLeontiev\Documents\GitHub\Graph\Graph\obj\Debug\Graph.csproj.CopyComplete

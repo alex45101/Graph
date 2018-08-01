@@ -65,13 +65,13 @@ namespace Graph
             }
 
             Console.WriteLine();
-
+            
             for (int i = 0; i < 10; i++)
             {
                 queue.Dequeue();
                 Console.WriteLine(queue.ToString());
             }
-
+            
             Console.ReadKey();
         }        
     }

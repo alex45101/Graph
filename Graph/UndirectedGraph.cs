@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Graph
 {    
-    public class UndirectedGraph<T> : BaseGraph<T, Vertex<T>> where T : IComparable
+    public class UndirectedGraph<T> : BaseGraph<T, Vertex<T>> where T : IComparable<T>
     {
         public List<Vertex<T>> Vertices { get; private set; }
 
