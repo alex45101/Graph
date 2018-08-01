@@ -74,6 +74,11 @@ namespace Graph
             return count == 0;
         }
 
+        public bool Contains(T item)
+        {
+            return tree.Contains(item);
+        }
+
         private void HeapifyUp(int index)
         {
             int parent = index / 2;

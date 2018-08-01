@@ -71,7 +71,9 @@ namespace Graph
                 queue.Dequeue();
                 Console.WriteLine(queue.ToString());
             }
-            
+
+            directed.Dijkstra(directed[0], directed[4]);
+
             Console.ReadKey();
         }        
     }

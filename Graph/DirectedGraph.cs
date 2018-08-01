@@ -176,9 +176,15 @@ namespace Graph
         }
 
         public IEnumerable<Vertex<T>> Dijkstra(DVertex<T> start, DVertex<T> end)
-        {            
+        {
+            if (!Vertices.Contains(start) && !Vertices.Contains(end))
+            {
+                return null;
+            }
+
             var info = new Dictionary<DVertex<T>, (DVertex<T> founder, int distance)>();
-            var queue = new PriorityQueue<DVertex<T>>(Comparer<DVertex<T>>.Create((a, b) => a.Value.CompareTo(b.Value)));
+
+            var queue = new PriorityQueue<DVertex<T>>(Comparer<DVertex<T>>.Create((a, b) => info[a].distance.CompareTo(info[b].distance)));
 
             for (int i = 0; i < Count; i++)
             {
@@ -186,12 +192,36 @@ namespace Graph
                 info.Add(this[i], (null, int.MaxValue));
             }
 
+            info[start] = (null, 0);
+            queue.Enqueue(start);
+
             while (!queue.IsEmpty())
             {
                 var vertex = queue.Dequeue();
+                vertex.IsVisited = true;
+
+                //if infinite graph, break if you just popped the end
 
                 //find tentative distances
+                foreach (var edge in vertex.Neighbors)
+                {
+                    var neighbor = edge.EndingPoint;
+                    int tentative = edge.Distance + info[vertex].distance;
+                    if (tentative < info[neighbor].distance)
+                    {
+                        info[neighbor] = (vertex, tentative);
+                        neighbor.IsVisited = false;
+                    }
+
+                    //if they are not in the queue AND have not been visited, add them to the queue
+                    if (!queue.Contains(neighbor) && !neighbor.IsVisited)
+                    {
+                        queue.Enqueue(neighbor);
+                    }
+                }
             }
+
+            //start at and and build stack of founders back to beginning
 
             throw new IndexOutOfRangeException();
         }
