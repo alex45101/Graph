@@ -83,7 +83,7 @@ namespace Graph
         {
             int parent = index / 2;
 
-            if (comparer.Compare(tree[parent], tree[0]) == 0 || comparer.Compare(tree[index], tree[parent]) == 0)
+            if (parent < 1 || comparer.Compare(tree[parent], tree[1]) == 0 || comparer.Compare(tree[index], tree[parent]) == 0)
             {
                 return;
             }

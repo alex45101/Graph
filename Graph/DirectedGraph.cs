@@ -175,7 +175,7 @@ namespace Graph
             }
         }
 
-        public IEnumerable<Vertex<T>> Dijkstra(DVertex<T> start, DVertex<T> end)
+        public IEnumerable<DVertex<T>> Dijkstra(DVertex<T> start, DVertex<T> end)
         {
             if (!Vertices.Contains(start) && !Vertices.Contains(end))
             {
@@ -221,9 +221,21 @@ namespace Graph
                 }
             }
 
-            //start at and and build stack of founders back to beginning
+            //start at end and build stack of founders back to beginning
+            Stack<DVertex<T>> stack = new Stack<DVertex<T>>();
 
-            throw new IndexOutOfRangeException();
+            //todo fix
+            for (int i = info.Count - 1; i > -1; i--)
+            {
+                var temp = info.ElementAt(i);
+
+                if (i == 0 || stack.Count != 0 && stack.Peek().Value.CompareTo(temp.Value.founder.Value) == 0)
+                {
+                    stack.Push(temp.Key);
+                }
+            }
+
+            return stack;
         }
     }
 }

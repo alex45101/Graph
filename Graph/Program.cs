@@ -50,6 +50,7 @@ namespace Graph
             directed.AddEdge(directed[4], directed[3], 6);  //7->9
             directed.AddEdge(directed[4], directed[0], 7);  //7->0
 
+
             Console.WriteLine("\nDirected Depth-First Search:");
             directed.DepthFirstSearch(directed[0]);
 
@@ -72,7 +73,46 @@ namespace Graph
                 Console.WriteLine(queue.ToString());
             }
 
-            directed.Dijkstra(directed[0], directed[4]);
+            var vertices = (Stack<DVertex<int>>)directed.Dijkstra(directed[0], directed[4]);
+            int count = vertices.Count;
+
+            for (int i = 0; i < count; i++)
+            {
+                Console.Write($"{vertices.Pop().Value}{(i == count - 1 ? "\n" : "->") }");
+            }
+
+            DirectedGraph<string> houseThing = new DirectedGraph<string>();
+
+            //https://brilliant.org/wiki/dijkstras-short-path-finder/
+
+            houseThing.AddVertex(new DVertex<string>("Home"));      //0
+            houseThing.AddVertex(new DVertex<string>("A"));         //1
+            houseThing.AddVertex(new DVertex<string>("B"));         //2
+            houseThing.AddVertex(new DVertex<string>("C"));         //3
+            houseThing.AddVertex(new DVertex<string>("D"));         //4
+            houseThing.AddVertex(new DVertex<string>("E"));         //5
+            houseThing.AddVertex(new DVertex<string>("F"));         //6
+            houseThing.AddVertex(new DVertex<string>("School"));    //7
+
+            houseThing.AddEdge(houseThing[0], houseThing[1], 3);
+            houseThing.AddEdge(houseThing[0], houseThing[2], 2);
+            houseThing.AddEdge(houseThing[0], houseThing[3], 5);
+            houseThing.AddEdge(houseThing[1], houseThing[4], 3);
+            houseThing.AddEdge(houseThing[2], houseThing[4], 1);
+            houseThing.AddEdge(houseThing[2], houseThing[5], 6);
+            houseThing.AddEdge(houseThing[3], houseThing[5], 2);
+            houseThing.AddEdge(houseThing[4], houseThing[6], 4);
+            houseThing.AddEdge(houseThing[5], houseThing[6], 1);
+            houseThing.AddEdge(houseThing[5], houseThing[7], 4);
+            houseThing.AddEdge(houseThing[6], houseThing[7], 2);
+
+            var housePath = (Stack<DVertex<string>>)houseThing.Dijkstra(houseThing[0], houseThing[7]);
+            count = housePath.Count - 1;
+
+            for (int i = 0; i < count; i++)
+            {
+                Console.Write($"{housePath.Pop().Value}{(i == count - 1 ? "\n" : "->") }");
+            }
 
             Console.ReadKey();
         }        
