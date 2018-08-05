@@ -224,15 +224,17 @@ namespace Graph
             //start at end and build stack of founders back to beginning
             Stack<DVertex<T>> stack = new Stack<DVertex<T>>();
 
-            //todo fix
-            for (int i = info.Count - 1; i > -1; i--)
+            var current = info.ElementAt(info.Count - 1);
+            while(true)
             {
-                var temp = info.ElementAt(i);
+                stack.Push(current.Key);
 
-                if (i == 0 || stack.Count != 0 && stack.Peek().Value.CompareTo(temp.Value.founder.Value) == 0)
+                if (current.Value.founder == null)
                 {
-                    stack.Push(temp.Key);
+                    break;
                 }
+
+                current = new KeyValuePair<DVertex<T>, (DVertex<T> founder, int distance)>(current.Value.founder, info[current.Value.founder]);
             }
 
             return stack;

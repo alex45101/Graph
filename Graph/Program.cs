@@ -107,7 +107,7 @@ namespace Graph
             houseThing.AddEdge(houseThing[6], houseThing[7], 2);
 
             var housePath = (Stack<DVertex<string>>)houseThing.Dijkstra(houseThing[0], houseThing[7]);
-            count = housePath.Count - 1;
+            count = housePath.Count;
 
             for (int i = 0; i < count; i++)
             {
