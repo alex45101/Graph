@@ -51,6 +51,10 @@ namespace Graph
             return true;
         }
 
+        public bool CombineVerticies(DVertex<T> a, DVertex<T> b)
+        {
+            throw new NotImplementedException();
+        }
 
         public override bool RemoveVertex(DVertex<T> vertex)
         {
@@ -238,6 +242,13 @@ namespace Graph
             }
 
             return stack;
+        }
+
+        public IEnumerable<DVertex<T>> Astar()
+        {
+
+
+            throw new NotImplementedException();
         }
     }
 }
